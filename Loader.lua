@@ -44,47 +44,39 @@ local function GetGameInfo()
     return HXKDE.SomeBitchass
 end
 
-getgenv().Parvus = {
+getgenv().HXKDE = {
     Source = "https://github.com/HXKDE/eseses/tree/SomeBitchass" .. Branch .. "/",
 
     Games = {
-        ["Universal" ] = { Name = "Universal",                  Script = "Universal"  },
-        ["1168263273"] = { Name = "Bad Business",               Script = "Games/BB"   },
-        ["3360073263"] = { Name = "Bad Business PTR",           Script = "Games/BB"   },
-        ["1586272220"] = { Name = "Steel Titans",               Script = "Games/ST"   },
-        ["807930589" ] = { Name = "The Wild West",              Script = "Games/TWW"  },
-        ["580765040" ] = { Name = "RAGDOLL UNIVERSE",           Script = "Games/RU"   },
-        ["187796008" ] = { Name = "Those Who Remain",           Script = "Games/TWR"  },
-        ["358276974" ] = { Name = "Apocalypse Rising 2",        Script = "Games/AR2"  },
-        ["3495983524"] = { Name = "Apocalypse Rising 2 Dev.",   Script = "Games/AR2"  },
-        ["1054526971"] = { Name = "Blackhawk Rescue Mission 5", Script = "Games/BRM5" }
+        ["358276974" ] = { Name = "Apocalypse Rising 2",        Script = "Games/AR2"  }
+        
     }
 }
 
-HXKDE.SomeBitchass = LoadScript("Utilities/Main")
-HXKDE.SomeBitchass.UI = LoadScript("Utilities/UI")
-HXKDE.SomeBitchass.Physics = LoadScript("Utilities/Physics")
-HXKDE.SomeBitchass.Drawing = LoadScript("Utilities/Drawing")
+HXKDE.SomeBitchass = LoadScript("SomeBitchass/Main")
+HXKDE.SomeBitchass.UI = LoadScript("SomeBitchass/UI")
+HXKDE.SomeBitchass.Physics = LoadScript("SomeBitchass/Physics")
+HXKDE.SomeBitchass.Drawing = LoadScript("SomeBitchass/Drawing")
 
-HXKDE.Cursor = GetFile("Utilities/ArrowCursor.png")
-HXKDE.Loadstring = GetFile("Utilities/Loadstring")
-HXKDE.Loadstring = Parvus.Loadstring:format(
-    Parvus.Source, Branch, NotificationTime, tostring(IsLocal)
+HXKDE.Cursor = GetFile("SomeBitchass/ArrowCursor.png")
+HXKDE.Loadstring = GetFile("SomeBitchass/Loadstring")
+HXKDE.Loadstring = HXKDE.Loadstring:format(
+    HXKDE.Source, Branch, NotificationTime, tostring(IsLocal)
 )
 
 LocalPlayer.OnTeleport:Connect(function(State)
     if State == Enum.TeleportState.InProgress then
         --ClearTeleportQueue()
-        QueueOnTeleport(Parvus.Loadstring)
+        QueueOnTeleport(HXKDE.Loadstring)
     end
 end)
 
 HXKDE.Game = GetGameInfo()
-LoadScript(Parvus.Game.Script)
+LoadScript(HXKDE.SomeBitchass.Script)
 HXKDE.Loaded = true
 
 HXKDE.SomeBitchass.UI:Push({
     Title = "Skidd Hub",
-    Description = Parvus.Game.Name .. " loaded!\n\nThis script is open sourced\nIf you have paid for this script\nOr had to go thru ads\nYou have been scammed.",
+    Description = HXKDE.SomeBitchass.Name .. " loaded!\n\nThis script is open sourced\nIf you have paid for this script\nOr had to go thru ads\nYou have been scammed.",
     Duration = NotificationTime
 })
